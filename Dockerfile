@@ -20,6 +20,7 @@ RUN set -x \
     && curl -fSL https://github.com/openstack/ironic/archive/${VERSION}.tar.gz -o ironic-${VERSION}.tar.gz \
     && tar xf ironic-${VERSION}.tar.gz \
     && cd ironic-${VERSION} \
+    && pip install paramiko \
     && pip install -r requirements.txt \
     #&& PBR_VERSION=${VERSION}  pip install . \
     && pip install uwsgi==2.0.15 PyMySQL==0.7.4 \
