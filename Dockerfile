@@ -1,4 +1,4 @@
-FROM cmp1234/nginx-python:1.10.3-python2.7.13-alpine3.6
+FROM python:2.7.14-alpine3.6
 
 MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
@@ -22,7 +22,7 @@ RUN set -x \
     && cd ironic-${VERSION} \
     && pip install paramiko \
     && pip install -r requirements.txt \
-    #&& PBR_VERSION=${VERSION}  pip install . \
+    && PBR_VERSION=${VERSION}  pip install . \
     && pip install uwsgi==2.0.15 PyMySQL==0.7.4 \
     && apk add --no-cache --virtual .run-deps  \
     	libffi=3.2.1-r3 \
