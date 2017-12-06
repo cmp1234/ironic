@@ -14,7 +14,7 @@ RUN set -x \
     && pip install -r requirements.txt \
     && PBR_VERSION=${VERSION}  pip install . \
     && apt-get install -y --no-install-recommends \
-    	libffi qemu open-iscsi psmisc genisoimage \
+    	 qemu open-iscsi psmisc genisoimage \
     && cp -r etc / \
     && pip install PyMySQL python-openstackclient python-ironicclient[cli] \
     && cd - \
