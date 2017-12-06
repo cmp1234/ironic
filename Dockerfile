@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch
+FROM python:2.7-slim-jessie
 
 MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
