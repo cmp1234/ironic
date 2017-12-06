@@ -12,12 +12,11 @@ RUN set -x \
     && cd ironic-${VERSION} \
     && pip install -r requirements.txt \
     && PBR_VERSION=${VERSION}  pip install . \
-    && pip install PyMySQL==0.7.4 \
     && apt-get install -y --no-install-recommends \
     	libffi qemu open-iscsi psmisc genisoimage \
     && cp -r etc / \
-    && pip install python-openstackclient python-ironicclient[cli]\
+    && pip install PyMySQL python-openstackclient python-ironicclient[cli] \
     && cd - \
     && rm -rf ironic-${VERSION}* \
-    && apt-get purge -y --auto-remove $buildDeps
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get purge -y --auto-remove $buildDeps \
+    && rm -rf /var/lib/apt/lists/*
