@@ -25,9 +25,9 @@ RUN set -x \
     && PBR_VERSION=${VERSION}  pip install . \
     && pip install uwsgi==2.0.15 PyMySQL==0.7.4 \
     && apk add --no-cache --virtual .run-deps  \
-    	libffi=3.2.1-r3 \
+    	libffi=3.2.1-r3 qemu open-iscsi psmisc cdrkit\
     && cp -r etc / \
-    && pip install python-openstackclient \
+    && pip install python-openstackclient python-ironicclient[cli]\
     && cd - \
     && rm -rf ironic-${VERSION}* \
     && apk del .build-deps
