@@ -6,7 +6,7 @@ ENV VERSION=7.0.3
 
 RUN set -x \  
     && apt-get update \
-	&& buildDeps='curl gcc make linux-headers libffi-dev zlib-dev mariadb-dev' \
+	&& buildDeps='curl gcc make libffi-dev' \
 	&& apt-get install -y --no-install-recommends $buildDeps \
     && curl -fSL https://github.com/openstack/ironic/archive/${VERSION}.tar.gz -o ironic-${VERSION}.tar.gz \
     && tar xf ironic-${VERSION}.tar.gz \
