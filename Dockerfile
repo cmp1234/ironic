@@ -22,5 +22,4 @@ RUN set -x \
     && cd - \
     && rm -rf ironic-${VERSION}* \
     && yum erase -y $buildDeps \
-	&& yum clean \
-	&& rm -rf /var/lib/apt/lists/*
+	&& yum clean all
