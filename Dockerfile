@@ -21,5 +21,5 @@ RUN set -x \
     && pip install python-openstackclient python-ironicclient[cli]\
     && cd - \
     && rm -rf ironic-${VERSION}* \
-    && yum erase -y $buildDeps \
+    && yum remove -y $buildDeps \
 	&& yum clean all
