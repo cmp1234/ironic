@@ -16,10 +16,11 @@ RUN set -x \
     && PBR_VERSION=${VERSION}  pip install . \
     && pip install PyMySQL==0.7.4 \
     && yum install -y \
-    	libffi qemu iscsi-initiator psmisc genisoimage \
+    	libffi qemu iscsi-initiator-utils psmisc genisoimage \
     && cp -r etc / \
     && pip install python-openstackclient python-ironicclient[cli]\
     && cd - \
     && rm -rf ironic-${VERSION}* \
     #&& yum remove -y $buildDeps \
 	&& yum clean all
+COPY ironic.conf /etc/ironic/ironic.conf
