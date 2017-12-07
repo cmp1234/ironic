@@ -15,7 +15,7 @@ RUN set -x \
     && pip install -r requirements.txt \
     && PBR_VERSION=${VERSION}  pip install . \
     && pip install PyMySQL==0.7.4 \
-    && yum install -y --no-install-recommends \
+    && yum install -y \
     	libffi qemu iscsi-initiator psmisc genisoimage \
     && cp -r etc / \
     && pip install python-openstackclient python-ironicclient[cli]\
