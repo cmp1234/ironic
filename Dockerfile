@@ -50,9 +50,11 @@ RUN set -x \
     && curl -fSL $NGINX_DOWNLOAD_URL -o nginx.tar.gz \
     && tar xf nginx.tar.gz \
     && cd nginx-$NGINX_VERSION \
-    && ./configure
-    && make
-    && make install
+    && ./configure \
+    && make \
+    && make install \
+    && cd .. \
+    && rm nginx* -rf \
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
