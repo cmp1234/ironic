@@ -4,7 +4,7 @@ MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
 ENV VERSION=7.0.3
 ENV MYSQL_VERSION=5.7.20
-ENV NGINX_VERSION=1.12.2
+ENV NGINX_VERSION=1.13.3
 ENV NGINX_DOWNLOAD_URL=http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
 ENV ERLANG_DOWNLOAD_URL=https://github.com/rabbitmq/erlang-rpm/releases/download/v19.3.6.8/erlang-19.3.6.8-1.el7.centos.x86_64.rpm
 ENV RABBIT_DOWNLOAD_URL=https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.4/rabbitmq-server-3.7.4-1.el7.noarch.rpm
