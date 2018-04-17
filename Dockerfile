@@ -43,6 +43,7 @@ RUN set -x \
     && rpm -ivh mysql-community-libs-$MYSQL_VERSION-1.el7.x86_64.rpm  \
     && rpm -ivh mysql-community-client-$MYSQL_VERSION-1.el7.x86_64.rpm  \
     && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
+    && rm *.rpm msyql.tar.gz -rf \
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
