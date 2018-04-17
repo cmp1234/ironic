@@ -10,6 +10,8 @@ ENV ERLANG_DOWNLOAD_URL=https://github.com/rabbitmq/erlang-rpm/releases/download
 ENV RABBIT_DOWNLOAD_URL=https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.4/rabbitmq-server-3.7.4-1.el7.noarch.rpm
 ENV MYSQL_DOWNLOAD_URL=https://downloads.mysql.com/archives/get/file/mysql-$MYSQL_VERSION-1.el7.x86_64.rpm-bundle.tar
 
+COPY nginx.repo /etc/yum.repos.d/nginx.repo
+
 RUN set -x \
 	&& yum install -y epel-release  \
 	&& yum install -y python-pip \
@@ -44,14 +46,6 @@ RUN set -x \
     && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
     && rm *.rpm msyql.tar.gz -rf \
     && echo "install nginx .............................." \
-    && touch /etc/yum.repos.d/nginx.repo \
-    && cat>/etc/yum.repos.d/nginx.repo<<EOF \
-[nginx] \
-name=nginx repo \
-baseurl=http://nginx.org/packages/mainline/centos/\$releasever/\$basearch/ \
-gpgcheck=0 \
-enabled=1 \
-EOF \
     && yum install -y nginx-$NGINX_VERSION \
     #&& yum remove -y $buildDeps \
     && yum clean all
