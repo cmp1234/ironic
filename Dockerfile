@@ -4,6 +4,8 @@ MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
 ENV VERSION=7.0.3
 ENV MYSQL_VERSION=5.7.20
+ENV NGINX_VERSION=1.12.2
+ENV NGINX_DOWNLOAD_URL=http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
 ENV ERLANG_DOWNLOAD_URL=https://github.com/rabbitmq/erlang-rpm/releases/download/v19.3.6.8/erlang-19.3.6.8-1.el7.centos.x86_64.rpm
 ENV RABBIT_DOWNLOAD_URL=https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.4/rabbitmq-server-3.7.4-1.el7.noarch.rpm
 ENV MYSQL_DOWNLOAD_URL=https://downloads.mysql.com/archives/get/file/mysql-$MYSQL_VERSION-1.el7.x86_64.rpm-bundle.tar
@@ -44,6 +46,13 @@ RUN set -x \
     && rpm -ivh mysql-community-client-$MYSQL_VERSION-1.el7.x86_64.rpm  \
     && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
     && rm *.rpm msyql.tar.gz -rf \
+    && echo "install nginx .............................." \
+    && curl -fSL $NGINX_DOWNLOAD_URL -o nginx.tar.gz \
+    && tar xf nginx.tar.gz \
+    && cd nginx-$NGINX_VERSION \
+    && ./configure
+    && make
+    && make install
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
