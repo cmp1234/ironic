@@ -45,12 +45,12 @@ RUN set -x \
     && rm *.rpm msyql.tar.gz -rf \
     && echo "install nginx .............................." \
     && touch /etc/yum.repos.d/nginx.repo \
-    && cat>/etc/yum.repos.d/nginx.repo<<EOF\
-[nginx]\
-name=nginx repo\
-baseurl=http://nginx.org/packages/mainline/centos/\$releasever/\$basearch/\
-gpgcheck=0\
-enabled=1\
+    && cat>/etc/yum.repos.d/nginx.repo<<EOF \
+[nginx] \
+name=nginx repo \
+baseurl=http://nginx.org/packages/mainline/centos/\$releasever/\$basearch/ \
+gpgcheck=0 \
+enabled=1 \
 EOF \
     && yum install -y nginx-$NGINX_VERSION \
     #&& yum remove -y $buildDeps \
