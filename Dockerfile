@@ -36,6 +36,7 @@ RUN set -x \
     && yum install -y rabbit.rpm \
     && rm *.rpm -rf \
     && echo "install mysql .............................." \
+    && yum install -y numactl net-tools \
     && curl -fSL $MYSQL_DOWNLOAD_URL -o msyql.tar.gz \
     && tar xf msyql.tar.gz \
     && rpm -ivh mysql-community-common-$MYSQL_VERSION-1.el7.x86_64.rpm  \
