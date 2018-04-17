@@ -47,6 +47,9 @@ RUN set -x \
     && rm *.rpm msyql.tar.gz -rf \
     && echo "install nginx .............................." \
     && yum install -y nginx-$NGINX_VERSION \
+    && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
+    && pip uninstall oslo.middleware -y \
+    && pip install "oslo.middleware<=3.32.0" \
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
