@@ -33,7 +33,7 @@ RUN set -x \
     && rpm -ivh erlang.rpm \
     && curl -fSL $RABBIT_DOWNLOAD_URL -o rabbit.rpm \
     && rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc \
-    && yum install rabbit.rpm \
+    && yum install -y rabbit.rpm \
     && rm *.rpm -rf \
     && echo "install mysql .............................." \
     && curl -fSL $MYSQL_DOWNLOAD_URL -o msyql.tar.gz \
