@@ -20,9 +20,13 @@ RUN set -x \
     && curl -fSL https://github.com/openstack/ironic/archive/${VERSION}.tar.gz -o ironic-${VERSION}.tar.gz \
     && tar xf ironic-${VERSION}.tar.gz \
     && cd ironic-${VERSION} \
+    && ls -l ironic/db/sqlalchemy \
+    && ls -l ironic/db/sqlalchemy/alembic \
     && sed -i 's/>/=/g' requirements.txt \
     && pip install -r requirements.txt \
     && PBR_VERSION=${VERSION}  pip install . \
+    && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy \
+    && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy/alembic \
     && pip install PyMySQL==0.7.4 \
     && yum install -y \
     	libffi qemu iscsi-initiator-utils psmisc genisoimage ipmitool tftp-server syslinux-tftpboot xinetd dhcp \
