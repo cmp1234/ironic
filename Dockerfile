@@ -50,8 +50,8 @@ RUN set -x \
     && echo "install nginx .............................." \
     && yum install -y nginx-$NGINX_VERSION \
     && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
-    && pip uninstall oslo.middleware oslo.db -y \
-    && pip install "oslo.middleware<=3.32.0" "oslo.db<=4.17.0" \
+    && pip uninstall kombu -y \
+    && pip install "kombu==3.0.32" \
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
