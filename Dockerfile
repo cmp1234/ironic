@@ -45,6 +45,7 @@ RUN set -x \
     && rpm -ivh mysql-community-client-$MYSQL_VERSION-1.el7.x86_64.rpm  \
     && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
     && rm *.rpm msyql.tar.gz -rf \
+    && mysqld --initialize-insecure \
     && echo "install nginx .............................." \
     && yum install -y nginx-$NGINX_VERSION \
     && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
