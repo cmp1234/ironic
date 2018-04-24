@@ -14,20 +14,9 @@ COPY nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN set -x \
 	&& yum install -y epel-release  \
-	&& yum install -y python-pip vim centos-release-openstack-ocata \
+	&& yum install -y python-pip vim \
 	&& buildDeps='python-pip curl gcc make linux-headers libffi-dev zlib-dev mariadb-dev python-devel' \
-	&& yum install -y $buildDeps \
-    && echo "install mysql .............................." \
-    && yum install -y numactl net-tools \
-    && curl -fSL $MYSQL_DOWNLOAD_URL -o msyql.tar.gz \
-    && tar xf msyql.tar.gz \
-    && rpm -ivh mysql-community-common-$MYSQL_VERSION-1.el7.x86_64.rpm  \
-    && rpm -ivh mysql-community-libs-$MYSQL_VERSION-1.el7.x86_64.rpm  \
-    && rpm -ivh mysql-community-client-$MYSQL_VERSION-1.el7.x86_64.rpm  \
-    && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
-    && rm *.rpm msyql.tar.gz -rf \
-    && mysqld --initialize-insecure \
-    && yum install -y iptables-services sudo openstack-ironic-api openstack-ironic-conductor python-ironicclient \
+	&& yum install -y $buildDeps iptables-services sudo \
     && curl -fSL https://github.com/openstack/ironic/archive/${VERSION}.tar.gz -o ironic-${VERSION}.tar.gz \
     && tar xf ironic-${VERSION}.tar.gz \
     && cd ironic-${VERSION} \
@@ -48,6 +37,16 @@ RUN set -x \
     && rpm --import https://www.rabbitmq.com/rabbitmq-release-signing-key.asc \
     && yum install -y rabbit.rpm \
     && rm *.rpm -rf \
+    && echo "install mysql .............................." \
+    && yum install -y numactl net-tools \
+    && curl -fSL $MYSQL_DOWNLOAD_URL -o msyql.tar.gz \
+    && tar xf msyql.tar.gz \
+    && rpm -ivh mysql-community-common-$MYSQL_VERSION-1.el7.x86_64.rpm  \
+    && rpm -ivh mysql-community-libs-$MYSQL_VERSION-1.el7.x86_64.rpm  \
+    && rpm -ivh mysql-community-client-$MYSQL_VERSION-1.el7.x86_64.rpm  \
+    && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
+    && rm *.rpm msyql.tar.gz -rf \
+    && mysqld --initialize-insecure \
     && echo "install nginx .............................." \
     && yum install -y nginx-$NGINX_VERSION \
     && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
