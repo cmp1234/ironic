@@ -16,6 +16,7 @@ RUN set -x \
 	&& yum install -y epel-release  \
 	&& yum install -y python-pip vim centos-release-openstack-ocata \
 	&& buildDeps='python-pip curl gcc make linux-headers libffi-dev zlib-dev mariadb-dev python-devel' \
+	&& yum install -y $buildDeps \
     && echo "install mysql .............................." \
     && yum install -y numactl net-tools \
     && curl -fSL $MYSQL_DOWNLOAD_URL -o msyql.tar.gz \
@@ -26,7 +27,7 @@ RUN set -x \
     && rpm -ivh mysql-community-server-$MYSQL_VERSION-1.el7.x86_64.rpm \
     && rm *.rpm msyql.tar.gz -rf \
     && mysqld --initialize-insecure \
-	&& yum install -y $buildDeps iptables-services sudo openstack-ironic-api openstack-ironic-conductor python-ironicclient \
+    && yum install -y iptables-services sudo openstack-ironic-api openstack-ironic-conductor python-ironicclient \
     && curl -fSL https://github.com/openstack/ironic/archive/${VERSION}.tar.gz -o ironic-${VERSION}.tar.gz \
     && tar xf ironic-${VERSION}.tar.gz \
     && cd ironic-${VERSION} \
