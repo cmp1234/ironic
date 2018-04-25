@@ -25,7 +25,7 @@ RUN set -x \
     && sed -i 's/>/=/g' requirements.txt \
     && pip install -r requirements.txt \
     && PBR_VERSION=${VERSION}  pip install . \
-    && cp ironic/db/sqlalchemy/* /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy/ \
+    && cp ironic/db/sqlalchemy/* /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy/ -rf \
     && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy \
     && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy/alembic \
     && pip install PyMySQL==0.7.4 \
