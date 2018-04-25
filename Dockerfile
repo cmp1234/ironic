@@ -58,7 +58,7 @@ RUN set -x \
     && yum install -y nginx-$NGINX_VERSION \
     && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
     && pip uninstall kombu -y \
-    && pip install "kombu==3.0.32" "proliantutils==2.2.0" \
+    && pip install "kombu==3.0.32" "proliantutils==2.2.0" "python-dracclient==1.1.1" \
     #&& yum remove -y $buildDeps \
     && yum clean all
 COPY ironic.conf /etc/ironic/ironic.conf
