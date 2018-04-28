@@ -3,6 +3,7 @@ FROM centos:7
 MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
 ENV VERSION=7.0.3
+ENV INSPECTOR_VERSION=6.1.0
 ENV MYSQL_VERSION=5.7.20
 ENV NGINX_VERSION=1.13.3
 ENV NGINX_DOWNLOAD_URL=http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz
@@ -39,18 +40,18 @@ RUN set -x \
     && rm -rf ironic-${VERSION}* \
     && echo "installing ironic inspector ......................................................................." \
     && yum install -y iptables-services sudo \
-    && curl -fSL https://github.com/openstack/ironic-inspector/archive/${VERSION}.tar.gz -o ironic-inspector-${VERSION}.tar.gz \
-    && tar xf ironic-inspector-${VERSION}.tar.gz \
-    && cd ironic-inspector-${VERSION} \
+    && curl -fSL https://github.com/openstack/ironic-inspector/archive/${INSPECTOR_VERSION}.tar.gz -o ironic-inspector-${INSPECTOR_VERSION}.tar.gz \
+    && tar xf ironic-inspector-${INSPECTOR_VERSION}.tar.gz \
+    && cd ironic-inspector-${INSPECTOR_VERSION} \
     && sed -i 's/>/=/g' requirements.txt \
     && pip install -r requirements.txt \
-    && PBR_VERSION=${VERSION}  pip install . \
+    && PBR_VERSION=${INSPECTOR_VERSION}  pip install . \
     && mkdir /etc/ironic-inspector \
     && cp rootwrap.conf /etc/ironic-inspector \
     && cp rootwrap.d /etc/ironic-inspector -rf \
     && pip install PyMySQL pymemcache\
     && cd - \
-    && rm -rf ironic-inspector-${VERSION}* \
+    && rm -rf ironic-inspector-${INSPECTOR_VERSION}* \
     && echo "installing rabbitmq ..................................................................................." \
     && curl -fSL $ERLANG_DOWNLOAD_URL -o erlang.rpm \
     && rpm -ivh erlang.rpm \
