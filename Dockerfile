@@ -35,7 +35,6 @@ RUN set -x \
     && yum install -y \
     	libffi qemu iscsi-initiator-utils psmisc genisoimage ipmitool tftp-server syslinux-tftpboot xinetd dhcp \
     && cp -r etc / \
-    && pip install python-openstackclient python-ironicclient[cli]\
     && cd - \
     && rm -rf ironic-${VERSION}* \
     && echo "installing ironic inspector ......................................................................." \
@@ -72,8 +71,8 @@ RUN set -x \
     && chown mysql:mysql -R /var/lib/mysql* \
     && echo "install nginx ............................................................................................" \
     && yum install -y nginx-$NGINX_VERSION \
-    && echo "fix ironic reference oslo.middleware bug, should reference <3.32.1" \
     && pip uninstall kombu -y \
+    && pip install python-openstackclient==3.8.1 python-ironicclient[cli]==2.0.0 \
     && pip install "kombu==3.0.32" "proliantutils==2.2.0" "python-dracclient==1.1.1" "python-ironic-inspector-client==1.11.0" \
     #&& yum remove -y $buildDeps \
     && yum clean all
