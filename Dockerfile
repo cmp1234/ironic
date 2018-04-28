@@ -37,20 +37,6 @@ RUN set -x \
     && cp -r etc / \
     && cd - \
     && rm -rf ironic-${VERSION}* \
-    && echo "installing ironic inspector ......................................................................." \
-    && yum install -y iptables-services sudo \
-    && curl -fSL https://github.com/openstack/ironic-inspector/archive/${INSPECTOR_VERSION}.tar.gz -o ironic-inspector-${INSPECTOR_VERSION}.tar.gz \
-    && tar xf ironic-inspector-${INSPECTOR_VERSION}.tar.gz \
-    && cd ironic-inspector-${INSPECTOR_VERSION} \
-    && sed -i 's/>/=/g' requirements.txt \
-    && pip install -r requirements.txt \
-    && PBR_VERSION=${INSPECTOR_VERSION}  pip install . \
-    && mkdir /etc/ironic-inspector \
-    && cp rootwrap.conf /etc/ironic-inspector \
-    && cp rootwrap.d /etc/ironic-inspector -rf \
-    && pip install PyMySQL pymemcache\
-    && cd - \
-    && rm -rf ironic-inspector-${INSPECTOR_VERSION}* \
     && echo "installing rabbitmq ..................................................................................." \
     && curl -fSL $ERLANG_DOWNLOAD_URL -o erlang.rpm \
     && rpm -ivh erlang.rpm \
