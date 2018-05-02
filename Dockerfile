@@ -31,7 +31,7 @@ RUN set -x \
     && cp ironic/drivers/* /usr/lib/python2.7/site-packages/ironic/drivers/ -rf \
     && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy \
     && ls -l /usr/lib/python2.7/site-packages/ironic/db/sqlalchemy/alembic \
-    && pip install PyMySQL==0.7.4 \
+    && pip install PyMySQL==0.7.4 ironic-inspector==$INSPECTOR_VERSION \
     && yum install -y \
     	libffi qemu iscsi-initiator-utils psmisc genisoimage ipmitool tftp-server syslinux-tftpboot xinetd dhcp \
     && cp -r etc / \
