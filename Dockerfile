@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:7.2.1511
 
 MAINTAINER Wang Lilong "wanglilong007@gmail.com"
 
